@@ -44,3 +44,11 @@ function greeting (name:string) : string {
     return `Hello ${name}`
 }
 console.log(greeting("Jihad"));
+
+
+//? null and undefine types
+let nothing : null = null ;
+let notAssigned : undefined = undefined
+
+//? type inference
+let city:string = "Bhola" ;
