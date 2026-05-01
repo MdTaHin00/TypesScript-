@@ -30,3 +30,18 @@ interface Person{
 interface Person{
     age:number
 }
+
+//! extends
+
+interface Animal {
+    name: string
+}
+
+interface Dog extends Animal{
+    breed: string
+}
+
+const myDog: Dog = {
+    name:"Tomey",
+    breed:"red"
+}
