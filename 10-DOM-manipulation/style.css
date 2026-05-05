@@ -1,0 +1,22 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    margin: 0px auto;
+}
+h1{
+    text-align: center;
+}
+
+form{
+    max-width: 300px;
+    text-align: center;
+    background: #98e29a;
+    padding: 20px 40px;
+}
+
+input{
+ padding: 10px 20px ;
+ border: none;
+ margin-top: 5px;
+}
