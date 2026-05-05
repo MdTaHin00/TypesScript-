@@ -71,3 +71,45 @@ class BankAccount {
 const bankAccount = new BankAccount("tahin", 2000)
 bankAccount.showBalance()
 
+
+  //!  inheritance class 
+
+  class Animal{
+     move(){
+        console.log("Loading move function..");
+     }
+  }
+
+  //* extends -> extends deya anno class ka aksatay kola
+  //? Dog hola Animal ar child class
+  //* Dog -> child class
+  class Dog extends Animal{
+    bark(){
+        console.log("bark function loading..");
+    }
+  }
+  //* class call 
+  const myBog = new Dog()
+  //* animal class function call
+  myBog.move();
+  myBog.bark()
+
+
+      //!  implements keyword
+  interface Drive{
+    start:()=> void ;
+    stop:()=> void ;
+  }    
+
+  //? implements -> interface and class connection kola
+  class Car implements Drive{
+    start(){
+        console.log('Car is started..');
+    }
+    stop(){
+        console.log('Car is stop');
+    }
+  }
+  const newCar = new Car()
+  newCar.start();
+  newCar.stop()
