@@ -53,7 +53,7 @@ function UserList() {
                     <li key={user.id} className="py-1">
                         <div className="flex items-center justify-between">
                           <div className="flex-1 min-w-0 ">
-                             <p className="text-sm font-medium truncate ">{user.name}</p>
+                             <p className="text-sm font-medium truncate">{user.name}</p>
                              <p className="text-sm text-gray-500">{user.email}</p>
                           </div>
 
