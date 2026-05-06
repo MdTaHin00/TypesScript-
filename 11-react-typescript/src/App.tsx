@@ -1,8 +1,8 @@
-
 import { useEffect, useState } from 'react';
 import './App.css'
 import Greeting from './components/Greeting'
 import From from './components/From';
+import RefMethod from './components/RefMethod';
 
 function App() {
 
@@ -28,13 +28,16 @@ function App() {
       <div>
         <h1>TypeScript use for React.js</h1>
         <Greeting username={user?.name} email={user?.email} age={age} />
-
+                               
         <p>Count : {count}</p>
         <button onClick={() => setCount(count + 1)}>Increment</button>
       </div>
 
       <div style={{marginTop:"30px"}}>
         <From/>
+      </div>
+      <div>
+        <RefMethod/>
       </div>
     </>
   )

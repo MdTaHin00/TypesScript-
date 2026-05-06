@@ -21,7 +21,7 @@ function From() {
                     <label htmlFor="">Email:</label>
                     <input type="email"
                         name="email" value={email}
-                        onChange={(e) => e.target.value}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                     />
                 </div>
@@ -30,7 +30,7 @@ function From() {
                     <label htmlFor="">Password:</label>
                     <input type="password"
                         name="password" value={password}
-                        onChange={(e) => e.target.value}
+                        onChange={(e) =>setPassword(e.target.value)}
                         required
                     />
                 </div>
