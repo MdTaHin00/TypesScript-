@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react"
 import type { User } from "../types/user"
-import { createUser, deleteUser, getUsers } from "../services/api"
+import { createUser, deleteUser, getUsers, updateUser } from "../services/api"
+import UpdateUserModal from "./UpdateUserModal"
 
 function UserList() {
 
     const [users, setUsers] = useState<User[]>([])
 
     const [loading, setLoading] = useState<boolean>(true)
-    const [error, setError] = useState<string>(null)
+    const [error, setError] = useState<string | null >(null)
+
+    const [selectedUser, setSelectedUser] = useState<User | null>(null)
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
     const [newUser, setNewUser] = useState<Omit<User, 'id'>>({
         "name": "",
@@ -32,13 +36,36 @@ function UserList() {
         }
     })
 
+     useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                setLoading(false)
+                const data = await getUsers();
+                setUsers(data)
+                setError(null)
+            } catch (error) {
+                setError("Failed to fetch users")
+                console.log(error);
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        fetchUser();
+    }, [])
+
+    if (loading) {
+        return <div className="m-30">Loading...</div>
+    }
+
+    if (error) {
+        return <div className="m-30">{error}...</div>
+    }
+
     const handelCreateUser = async () => {
         try {
-
             const createdUser = await createUser(newUser);
-
             setUsers([...users, createdUser])
-
             setNewUser({
                 "name": "",
                 "username": "",
@@ -61,51 +88,48 @@ function UserList() {
                     "bs": ""
                 }
             })
-
         } catch (error) {
             setError("Failed to create user")
             console.log(error);
         }
     }
 
-    useEffect(() => {
+   
 
-        const fetchUser = async () => {
-            try {
-                setLoading(false)
-                const data = await getUsers();
-                setUsers(data)
-                setError(null)
-            } catch (error) {
-                setError("Failed to fetch users")
-                console.log(error);
-            } finally {
-                setLoading(false)
-            }
-        }
-
-        fetchUser();
-
-    }, [])
-
-    if (loading) {
-        return <div className="m-30">Loading...</div>
-    }
-
-    if (error) {
-        return <div className="m-30">{error}...</div>
-    }
-
-    const handelDeleTeUser = async(id: number)=>{
-          try {
-             await deleteUser(id)
-             setUsers(users.filter(user => user.id !== id))
-          } catch (error) {
+    //! delete function
+    const handelDeleTeUser = async (id: number) => {
+        try {
+            await deleteUser(id)
+            setUsers(users.filter(user => user.id !== id))
+        } catch (error) {
             setError("Failed delete user")
             console.log(error);
-            
-          }
+        }
     }
+
+    //! update function 
+    const handelUpdateUser = async (id: number, updateData: Partial<User>) => {
+        try {
+            const updateUserData = await updateUser(id, updateData)
+            setUsers(users.map(user => user.id === id ? updateUserData : user))
+        } catch (error) {
+            setError("Failed user update")
+            console.log(error);
+        }
+    }
+
+    //! modal open function 
+    const openUpdateModel = (user: User) => {
+        setSelectedUser(user)
+        setIsModalOpen(true)
+    }
+
+    //! modal close function 
+    const closeUpdateModel = () => {
+        setSelectedUser(null)
+        setIsModalOpen(false)
+    }
+
 
 
     return (
@@ -155,8 +179,10 @@ function UserList() {
                                     </div>
 
                                     <div className="space-x-2">
-                                        <button className="text-sky-400 hover:text-sky-500 cursor-pointer font-medium bg-sky-500/10 px-1 py-0.5 rounded">Update</button>
-                                        <button onClick={()=> handelDeleTeUser(user.id) } className="text-red-400 hover:text-red-500 cursor-pointer font-medium bg-red-500/20 px-1 py-0.5 rounded">Delete</button>
+                                        <button 
+                                         onClick={openUpdateModel}
+                                        className="text-sky-400 hover:text-sky-500 cursor-pointer font-medium bg-sky-500/10 px-1 py-0.5 rounded">Update</button>
+                                        <button onClick={() => handelDeleTeUser(user.id)} className="text-red-400 hover:text-red-500 cursor-pointer font-medium bg-red-500/20 px-1 py-0.5 rounded">Delete</button>
 
                                     </div>
                                 </div>
@@ -164,8 +190,17 @@ function UserList() {
                         ))
                     }
                 </ul>
-
             </div>
+            {/* Update User Modal */}
+            {
+               selectedUser &&  <UpdateUserModal
+                 isModalOpen={isModalOpen}
+                 closeUpdateModel={closeUpdateModel}
+                 user= {selectedUser}
+                 handelUpdateUser = {handelUpdateUser}
+               />
+            }
+
         </div>
     )
 }

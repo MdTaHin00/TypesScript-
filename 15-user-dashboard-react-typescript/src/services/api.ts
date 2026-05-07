@@ -16,7 +16,6 @@ export const getUsers = async (): Promise<User[]> => {
 
 
 //! create User 
-
 //? Omit -> default typescript var name
 //*  'id'  -> id oper base kola user create hoy tai ai code
 export const createUser = async (user: Omit<User, 'id'>): Promise<User> => {
@@ -35,7 +34,22 @@ export const createUser = async (user: Omit<User, 'id'>): Promise<User> => {
     return response.json()
 }
 
+//! update user method
+//? Partial -> update koral janno default value 
+export const updateUser = async (id: number,user : Partial<User>) : Promise <User> =>{
+   const response = await fetch(`${API_URL}/${id}`,{
+   method:"PUT" ,
+   headers:{
+    'Content-Type': 'application/json',
+   },
+   body: JSON.stringify(user)
+   })
 
+   return response.json()
+}
+
+
+//! deleted method
 export const deleteUser = async (id: number): Promise<void> => {
     const response = await fetch(`${API_URL}/${id}`, {
         method: "DELETE"
