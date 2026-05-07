@@ -19,7 +19,7 @@ export const getUsers = async (): Promise<User[]> => {
 
 //? Omit -> default typescript var name
 //*  'id'  -> id oper base kola user create hoy tai ai code
-export const createUser = async (user: Omit<User, 'id'>): Promise <User> => {
+export const createUser = async (user: Omit<User, 'id'>): Promise<User> => {
     const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
@@ -34,3 +34,17 @@ export const createUser = async (user: Omit<User, 'id'>): Promise <User> => {
 
     return response.json()
 }
+
+
+export const deleteUser = async (id: number): Promise<void> => {
+    const response = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE"
+    })
+
+    if(!response.ok){
+        console.log("Failed a delete user");
+    } 
+    
+}
+
+
