@@ -14,7 +14,7 @@ app.use(express.json())
 //? routes
 
 app.get("/",(req:Request, res:Response) => {
-    res.send("Backend Server running..")
+    res.send("Backend Server is running..")
 })
 
 export default app ;

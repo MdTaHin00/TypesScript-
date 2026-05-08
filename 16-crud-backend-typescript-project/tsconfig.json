@@ -7,7 +7,7 @@
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "esnext",
+    "module": "commonjs",
     "target": "esnext",
     "types":[],
     // For nodejs:
@@ -40,7 +40,7 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-  },
+   },
 
   //!  include -> src folder moda sob folder & file run korva 
   "include": ["src/**/*"] ,
@@ -48,3 +48,4 @@
   "exclude": ["node_modules" , "dist"]
 
 }
+
