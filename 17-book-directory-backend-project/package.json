@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./dist/server.ts",
-    "server": "ts-node-dev --respawn --transpile-only src/server.ts "
+    "server": "ts-node-dev --respawn --transpile-only src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "mongoose": "^9.6.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "nodemon": "^3.1.14",
     "ts-node-dev": "^2.0.0",
