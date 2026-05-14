@@ -7,12 +7,12 @@ import  {BookInterface} from "./book-interface";
 const bookModel = new Schema <BookInterface>({
     title:{
         type:String,
-        require:true,
+        required:true,
         trim:true
     },
     author:{
         type:String,
-        require:true,
+        required:true,
         trim:true,
     },
     description:{
@@ -21,22 +21,22 @@ const bookModel = new Schema <BookInterface>({
     },
     genre:{
         type:String,
-        require:true,
+        required:true,
         trim:true
     },
     publicationYear:{
         type:Number,
-        require:true
+        required:true
     },
     isbn:{
         type:String,
-        require:true,
+        required:true,
         trim:true,
         unique:true
     },
     price:{
         type:Number,
-        require:true,
+        required:true,
         min:0
     },
     isAvailable:Boolean
