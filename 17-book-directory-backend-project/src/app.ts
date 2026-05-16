@@ -1,6 +1,7 @@
 import express from 'express' ;
 import cors from 'cors' ;
 import bookRoute from './app/modules/books/book-router';
+import userRoute from './app/modules/auth/user-routes'
 const app = express() ;
 
 
@@ -11,7 +12,10 @@ app.use(cors()) ;
 
 
 //! routes
+//* book route 
 app.use("/api/books",bookRoute)
+//* user route
+app.use("/api/users", userRoute)
 
 
 app.get('/',(req,res) =>{
