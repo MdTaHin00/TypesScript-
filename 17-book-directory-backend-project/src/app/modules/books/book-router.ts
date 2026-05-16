@@ -9,19 +9,19 @@ import {adminToken} from '../../middleware/token-verify-middleware';
 const router = express.Router();
 
 //? create new book and admin
- router.post("/", tokenVerify , adminToken ,postBook)
+ router.post("/" , tokenVerify ,adminToken ,postBook)
 
 //? get all book 
 router.get("/", tokenVerify , getAllBooks)
 
 //? get single book by id 
-router.get("/:id", tokenVerify , getSingleBook)
+router.get("/:id", tokenVerify ,adminToken, getSingleBook)
 
 //? put method book update by id and admin
-router.put("/:id",updateBook)
+router.put("/:id", tokenVerify ,adminToken,updateBook)
 
 //? delete single book by id  and admin 
-router.delete("/:id",deleteBook)
+router.delete("/:id", tokenVerify ,adminToken,deleteBook)
 
 
 

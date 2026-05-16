@@ -2,6 +2,7 @@ import express from 'express' ;
 import cors from 'cors' ;
 import bookRoute from './app/modules/books/book-router';
 import userRoute from './app/modules/auth/user-routes'
+import {errorHandel} from './app/middleware/errorHandler';
 const app = express() ;
 
 
@@ -17,6 +18,9 @@ app.use("/api/books",bookRoute)
 //* user route
 app.use("/api/users", userRoute)
 
+
+//! error 
+app.use(errorHandel)
 
 app.get('/',(req,res) =>{
     res.send("Book Directory server is running..!")
